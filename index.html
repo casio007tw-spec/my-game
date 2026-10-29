@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>2048 益智遊戲 - 期中專題</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-wrapper">
+    <!-- 頁首：標題與分數看板 -->
+    <header class="header">
+      <div class="title-container">
+        <h1 class="game-title">2048</h1>
+        <p class="subtitle">合併方塊，挑戰極限 2048！</p>
+      </div>
+      <div class="scores-container">
+        <div class="score-box">
+          <span class="score-label">SCORE</span>
+          <span class="score-value" id="current-score">0</span>
+          <div class="score-addition" id="score-addition"></div>
+        </div>
+        <div class="score-box">
+          <span class="score-label">BEST</span>
+          <span class="score-value" id="best-score">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 操作功能列 -->
+    <div class="toolbar">
+      <p class="game-intro">使用 <strong>方向鍵 / WASD</strong> 或 <strong>滑動手勢</strong> 移動</p>
+      <div class="button-group">
+        <button id="undo-btn" class="btn btn-secondary" title="復原上一步">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/>
+          </svg>
+          復原
+        </button>
+        <button id="restart-btn" class="btn btn-primary">重新開始</button>
+      </div>
+    </div>
+
+    <!-- 遊戲主棋盤 (4x4 Grid) -->
+    <main class="game-container" id="game-container">
+      <!-- 靜態背景格子 (16格) -->
+      <div class="grid-background">
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+      </div>
+
+      <!-- 動態方塊層 -->
+      <div class="tile-container" id="tile-container"></div>
+
+      <!-- 遊戲結算訊息彈窗 -->
+      <div class="game-overlay" id="game-overlay">
+        <div class="overlay-content">
+          <h2 class="overlay-title" id="overlay-title">遊戲結束</h2>
+          <p class="overlay-message" id="overlay-message">沒有可移動的方塊了！</p>
+          <div class="overlay-actions">
+            <button id="overlay-action-btn" class="btn btn-primary">再玩一次</button>
+            <button id="overlay-continue-btn" class="btn btn-secondary" style="display: none;">繼續挑戰</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 遊戲說明與演算法亮點 -->
+    <footer class="footer-info">
+      <h3>💡 玩法規則與核心機制說明</h3>
+      <ul>
+        <li><strong>規則：</strong>相同數字的方塊碰撞時會合併為兩倍數值（如 2 + 2 = 4）。</li>
+        <li><strong>勝利：</strong>成功合成出 <strong>2048</strong> 即可獲勝，並可選擇繼續追求更高分數！</li>
+        <li><strong>演算法亮點：</strong>採用 4x4 二維矩陣運算，透過矩陣轉置 (Transpose) 與鏡像反轉 (Reverse) 高效實現四方向滑動合併；整合遞迴狀態判斷偵測 Game Over。</li>
+      </ul>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
